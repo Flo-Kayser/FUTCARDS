@@ -1,7 +1,9 @@
-name: Manuelles JSON Update
+name: Tägliches Cards-Update (Deutschland 19:10 AM)
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '10 17 * 3-10 *'      # Sommerzeit: 10:10 PDT = 17:10 UTC
+    - cron: '10 18 * 11,12,1,2 *' # Winterzeit: 10:10 PST = 18:10 UTC
 
 jobs:
   update-json:
