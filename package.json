@@ -1,5 +1,14 @@
 {
+
+  "name": "futcards",
+  "version": "1.0.0",
+  "description": "A simple Node.js script to update JSON files with new data.",
+  "type": "module",
   "dependencies": {
     "axios": "^1.10.0"
+  },
+  "scripts": {
+    "update-json": "node scripts/update-json.js"
   }
 }
+
