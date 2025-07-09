@@ -1,0 +1,54 @@
+name: Manuelles JSON Update
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Workflow gestartet
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "Update gestartet – FUT-Sammelheft-Karten werden aktualisiert …"}' \
+               ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Repository klonen
+        uses: actions/checkout@v3
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Abhängigkeiten installieren
+        run: npm install axios
+
+      - name: JSON-Datei aktualisieren
+        run: node scripts/update-json-fast.js
+
+      - name: Änderungen committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cards.json
+          git commit -m "Update cards.json (automatisch 10:10 PT)" || echo "Keine Änderungen"
+          git push
+
+      - name: Update erfolgreich beendet
+        if: success()
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "✅ FUT-Sammelheft-Karten erfolgreich aktualisiert."}' \
+               ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Fehler beim Update
+        if: failure()
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "❌ Fehler beim aktualisieren der FUT-Sammelheft-Karten Bitte prüfen!"}' \
+               ${{ secrets.DISCORD_WEBHOOK }}

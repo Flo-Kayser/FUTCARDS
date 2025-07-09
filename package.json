@@ -8,7 +8,8 @@
     "axios": "^1.10.0"
   },
   "scripts": {
-    "update-json": "node scripts/update-json.js"
+    "update-json": "node scripts/update-json.js",
+    "update-json-fast": "node scripts/update-json-fast.js"
   }
 }
 
