@@ -1,4 +1,4 @@
-name: Manuelles JSON Update
+name: Manuelles JSON Update (Fast)
 
 on:
   workflow_dispatch:
