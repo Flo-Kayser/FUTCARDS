@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Aktuelle UTC-Zeit loggen
+        run: date -u
       - name: Workflow gestartet
         run: |
           curl -H "Content-Type: application/json" \
