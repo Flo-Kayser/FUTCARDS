@@ -9,7 +9,8 @@
   },
   "scripts": {
     "update-json": "node scripts/update-json.js",
-    "update-json-fast": "node scripts/update-json-fast.js"
+    "update-json-fast": "node scripts/update-json-fast.js",
+    "update-coreData": "node scripts/update-coreData.js"
   }
 }
 
